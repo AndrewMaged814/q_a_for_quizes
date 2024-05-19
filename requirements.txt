@@ -7,3 +7,4 @@ spacy
 python-dotenv
 langchain_community
 scikit-learn
+en_core_web_sm
