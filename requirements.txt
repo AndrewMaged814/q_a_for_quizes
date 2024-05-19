@@ -1,0 +1,6 @@
+streamlit
+PyPDFLoader
+matplotlib
+seaborn
+openai
+spacy
