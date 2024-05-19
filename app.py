@@ -6,11 +6,18 @@ from openai import AzureOpenAI
 import spacy
 from extracting_sections_using_sementics import chunk_text, segment_chunks, aggregate_segments
 import streamlit as st
+from dotenv import load_dotenv
+
+load_dotenv()
+
+api_key = os.getenv("AZURE_OPENAI_API_KEY")
+endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
+deploy_name = os.getenv("AZURE_OPENAI_CHAT_DEPLOYMENT")
 
 client = AzureOpenAI(
-    azure_endpoint="https://rose.openai.azure.com/",
+    api_key=api_key,
+    azure_endpoint=endpoint,
     api_version="2023-09-15-preview",
-    api_key="b9d149d4fd6b4f9bb84c932747308a47"
 )
 
 
@@ -38,7 +45,7 @@ def create_questions(context, question_type):
         prompt = f"Create true/false questions with answers based solely on this text from a paper:\n\n{context}\n\nFor each question, provide the correct answer as True or False. Use the format: Q: <statement>\nCorrect Answer: <True/False>\nSeparate each block composed of a question and an answer with 3 dashes '---'."
 
     response = client.chat.completions.create(
-        model="andrew",
+        model=deploy_name,
         messages=[
             {"role": "system",
                 "content": "You are a helpful research and programming assistant"},
@@ -60,7 +67,7 @@ def evaluate_answer(question, true_answer, user_answer, question_type):
     evaluate_prompt = f"{evaluation_context} Provide a score from 0 to 100 and feedback. The output should be formatted as follows: SCORE: <score number as an integer> FEEDBACK: <A one-sentence feedback justifying the score.>"
 
     response = client.chat.completions.create(
-        model="andrew",
+        model=deploy_name,
         messages=[
             {"role": "system",
                 "content": "You are a helpful research and programming assistant"},
