@@ -8,11 +8,12 @@ from extracting_sections_using_sementics import chunk_text, segment_chunks, aggr
 import streamlit as st
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(override=True)
 
 api_key = os.getenv("AZURE_OPENAI_API_KEY")
 endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
 deploy_name = os.getenv("AZURE_OPENAI_CHAT_DEPLOYMENT")
+
 
 client = AzureOpenAI(
     api_key=api_key,
