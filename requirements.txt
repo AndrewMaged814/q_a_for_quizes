@@ -1,6 +1,7 @@
 streamlit
-PyPDFLoader
+pypdf
 matplotlib
 seaborn
 openai
 spacy
+python-dotenv
