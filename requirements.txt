@@ -6,3 +6,4 @@ openai
 spacy
 python-dotenv
 langchain_community
+scikit-learn
